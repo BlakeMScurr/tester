@@ -35,11 +35,19 @@ type a struct{}
 
 func trickyReturnExample() (a, *a, int, *string, string, bool, error) {
 	i, _ := example() // ISSUE
+if err != nil {
+  return a{}, nil, int{}, nil, "", false, err
+}
+
 	return a{}, nil, i, nil, "hello", true, nil
 }
 
 func singleExample() error {
 	i, _ := example() // ISSUE
+if err != nil {
+  return err
+}
+
 	_ = i
 	return nil
 }
@@ -54,5 +62,9 @@ func nonErrorDiscard() (int, error) {
 
 func (b *a) methodExample() (int, error) {
 	i, _ := example() // ISSUE
+if err != nil {
+  return int{}, err
+}
+
 	return i, nil
 }
